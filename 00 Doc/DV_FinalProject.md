@@ -153,11 +153,12 @@ The number of sequenced genomes in Prokaryotes increased more sharply from 2010 
 
 Method:
 
-1. Create a calculated field named year_format. We need to convert the Date format since Tableau forecast only accepts data string format for forecast.
 
-
- + Calculated field
++ Calculated field
 ![](./year_format.png)
+
+
+1. Create a calculated field named year_format. We need to convert the Date format since Tableau forecast only accepts data string format for forecast.
 
 2. Drag year_format to Columns
 
@@ -174,10 +175,9 @@ Method:
 8. Click on the Edit trendline option, choose model type to Exponential.
 
 
+
+
 ![](./Forecast.png)
-
-
-
 
 *********
 **Figure: Sequencing Cost in past 10 years**
@@ -201,14 +201,16 @@ Method:
 
 ![](./Cost_DB.png)
 
-From this graph, we can see that the decreasing trend of genome sequencing cost (per Million basepair and per human-sized genome). We observed a sharp decrease in genome sequencing cost from 2007 to 2008. After 2008, the genome sequencing cost is still decreasing, but in a much slow rate.
+From this graph, we can see that the decreasing trend of genome sequencing cost (per Million basepair and per human-sized genome). 
+
+We observed a sharp decrease in genome sequencing cost from 2007 to 2008. After 2008, the genome sequencing cost is still decreasing, but in a much slower rate.
 
 *********
 **Figure: Trend of Genome Sequencing Cost**
 
 Method:
 
-1. Beside above methods, we right click on show trend line.
+1. Besides above methods, we right click on show trend line.
 
 2. Click on the Edit trendline option, choose model type to Exponential.
 
@@ -221,9 +223,9 @@ Method:
 From this genome sequencing cost trendline, we can see the slowly decreasing or stable trend in genome sequencing cost in the near future.
 
 *********
-**Data Visualization Part 1**
+**Data Visualization Part 2**
 *********
-**Part 1 Data Source:** 
+**Part 2 Data Source:** 
 ![](./Animal_Genome_Database.png)
 
 *********
@@ -233,10 +235,26 @@ From this genome sequencing cost trendline, we can see the slowly decreasing or 
 *********
 **Figure: C Value in Different Animal Groups**
 
+Method:
+
+1. Use the barrel button to load all 5 tables from oracle database.
+
+2. Drag C Val to Rows for each table, in Show Me choose box-and-whisker plot
+
+3. Create a new dashboard
+
+4. Drag each C value box-and-whisker plot to dashboard, and add a name to dashboard
+
 
 
 
 ![](./C_Vals.png)
+
+From this figure, we can see that C value differs a lot among all five animal groups.
+
+The Amphibian group shows the widest distribution of C values. 
+
+The Bird group shows the narrowest distribution of C values.
 
 *********
 **Figure: Median C Value and Number of Records in Mammal Orders**
@@ -247,6 +265,12 @@ From this genome sequencing cost trendline, we can see the slowly decreasing or 
 
 ![](./Mam_DB.png)
 
+In this figure we can see the Afrosoricida order in Mammal (hedgehog and moles) has the largest genome size.
+
+The Chiroptera order (bats) has the smallest genome size.
+
+The closest relative to humans (primates) has medium genome size among the mammals.
+
 *********
 **Figure: Median C Value in Different Bird Orders**
 
@@ -255,6 +279,12 @@ From this genome sequencing cost trendline, we can see the slowly decreasing or 
 
 
 ![](./Birds_distribution.png)
+
+In this figure, we show the genome size distribution in different orders in birds. 
+
+The interger numbers on top of each bar indicate the number of organisms sequenced in each bird order.
+
+From this figure, we can see Struthioniformes (Ostrich) has the largest genome size (as indicated by dark green), and Apodiformes (hummingbirds) has the smallest genome size (as indicated by pale green). 
 
 *********
 **Figure: Median C Value in Different Amphibian Species**
@@ -265,9 +295,20 @@ From this genome sequencing cost trendline, we can see the slowly decreasing or 
 
 ![](./Amphibian_CVal.png)
 
+This figure shows the distribution genome size (C Value)in Amphibian groups. 
+
+The bars are colored by different orders.
+
+We can see Amphiumidae (salamander) has the largest genome size in sequenced Amphibians (green).
+
+
+And Caeciliidae (frog) has the smallest genome size in sequenced Amphibians (orange)
+
 *********
 **Figure: Snapshot of using Table SQL option to Union Tables**
 ![](./select.png)
+
+This snippet of code shows how we union the 5 animal genome size tables together.
 
 *********
 **Figure: Distribution of C Value in Five Animal Groups**
@@ -276,6 +317,12 @@ From this genome sequencing cost trendline, we can see the slowly decreasing or 
 
 
 ![](./Union_dist.png)
+
+This graph shows the distribution of C values in all 5 animal groups. 
+
+We can see Amphibian has the largest V value distribution, as indicated in blue color.
+
+Most C Values are within 0-4.
 
 *********
 **Table: Nth largest C Value in each class**
@@ -286,12 +333,16 @@ From this genome sequencing cost trendline, we can see the slowly decreasing or 
 
 ![](./Nth_1.png)
 
+We created a crosstab to calculate the Nth rank of genome size in each Class.
+
+This table shows the 1st ranked genome size (C value) in each class.
+
 
 *********
 **Data Visualization Part 3**
 
 *********
-**Part 1 Data Source:** 
+**Part 3 Data Source:** 
 ![](./PlosOne.png)
 
 *********
