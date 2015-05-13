@@ -2,6 +2,8 @@
 ========================================================
 #### Group member: Anna Mengjie Yu (my3852),  Duy Vu (dhv242),  Syed Naqvi (san724)
 
+With the advent of next generation sequencing, the sequencing cost per genome is decreasing significantly. Genome size, gene content and gene order has been useful in studying species evolution and ecological adaptation. Good data visualization tools will help community better understand the evolution story underneath the data.
+
 In this project, we visualized genomic data from 3 different data sources. 
 
 In the first part, we visualized the status of current genome sequencing project and forecast the near future (5 years) in Tableau. We also visualized the cost of genome sequencing in the past decade in Tableau. The workbooks in named NumOfGenomeSequenced.twb. and GenomeCost.twb, respectively.
@@ -9,6 +11,9 @@ In the first part, we visualized the status of current genome sequencing project
 In the second part, we visualized the animal genome size in Tableau, the data is downloaded from Animal Genome Size Database. And the workbooks are named GenomeSize.twb and Union.twb.
 
 In the last part, we visualized diatom plastid genome data in R. The tables contain plastid genome gene content, gene length and gene order, and they are accessible from Supporting Information in Yu's publicaiton. [http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0107854]
+
+Data storage account information:
+USER='C##cs329e_my3852', PASS='orcl_my3852'
 
 *********
 Load packages
@@ -25,49 +30,99 @@ source("../01 Data/loadPackage.R", echo = TRUE)
 ![](./GenomeCostDataSource.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: Number of Sequenced Genomes in past 10 years**
 
 Method:
 
+1. Year to Columns
+
+2. Drag Eukaryotes to Rows.
+
+3. Drag Prokaryotes and Viruses to the left Y axis
+
+4. Drag MeasureNames to Color
+
+5. Create a new dashboard, drag this sheet to dashboard, and export it as image.
 
 
 ![](./NumberOfSeqGenomes.png)
 
-  
+
+From this graph, we can see the increasing trend of sequenced Eukaryotes, Prokaryotes and Viruses genomes.
+
+The number of sequenced genomes in Prokaryotes increased more sharply from 2010 to 2012, compared to Eukaryotes and Viruses.
 
 *********
-
-
-*********
-**Figure 1: Average Salary in Each Department**
+**Figure: Forecast of Number of Sequenced Genomes in next 5 Years**
 
 Method:
 
+1. Create a calculated field named year_format. We need to convert the Date format since Tableau forecast only accepts data string format for forecast.
+
+
+ + Calculated field
+![](./year_format.png)
+
+2. Drag year_format to Columns
+
+3. Drag Eukaryotes to Rows
+
+4. Drag Prokaryotes and Viruses to the Y axis.
+
+5. Click on Analysis, on the drag down menu click on forecast, click on show forecast.
+
+6. Click on forecast options, choose exactly 5 year forecast.
+
+7. Right click on the graph, click on show trendline.
+
+8. Click on the Edit trendline option, choose model type to Exponential.
 
 
 ![](./Forecast.png)
 
 
-Calculated field
-![](./year_format.png)
+
 
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: Sequencing Cost in past 10 years**
 
 Method:
 
+1. Drag Dates to Columns.
+
+2. Drag Cost per genome to Rows.
+
+3. Drag Cost Per Mb to Rows.
+
+4. Drag Cost per genome to label.
+
+5. Drag Cost Per Mb to label.
+
+6. Create a new dashboard
+
+7. Drag the Genome Sequencing Cost sheet to dashboard, and export it as image.
 
 
 ![](./Cost_DB.png)
 
+From this graph, we can see that the decreasing trend of genome sequencing cost (per Million basepair and per human-sized genome). We observed a sharp decrease in genome sequencing cost from 2007 to 2008. After 2008, the genome sequencing cost is still decreasing, but in a much slow rate.
+
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: Trend of Genome Sequencing Cost**
 
 Method:
+
+1. Beside above methods, we right click on show trend line.
+
+2. Click on the Edit trendline option, choose model type to Exponential.
+
+3. Edit trendline color, change it to red.
 
 
 
 ![](./Trend_cost.png)
+
+From this genome sequencing cost trendline, we can see the slowly decreasing or stable trend in genome sequencing cost in the near future.
 
 *********
 **Data Visualization Part 1**
@@ -76,71 +131,60 @@ Method:
 ![](./Animal_Genome_Database.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
-
-Method:
-
-
+**Figure: A Snapshot of Animal Genome Data**
 
 ![](./data.png)
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: C Value in Different Animal Groups**
 
-Method:
 
 
 
 ![](./C_Vals.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: Median C Value and Number of Records in Mammal Orders**
 
-Method:
+
 
 
 
 ![](./Mam_DB.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: Median C Value in Different Bird Orders**
 
-Method:
+
 
 
 
 ![](./Birds_distribution.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: Median C Value in Different Amphibian Species**
 
-Method:
+
 
 
 
 ![](./Amphibian_CVal.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
-
-Method:
-
-
-
+**Figure: Snapshot of using Table SQL option to Union Tables**
 ![](./select.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
+**Figure: Distribution of C Value in Five Animal Groups**
 
-Method:
 
 
 
 ![](./Union_dist.png)
 
 *********
-**Figure 1: Average Salary in Each Department**
+**Table: Nth largest C Value in each class**
 
-Method:
+
 
 
 
@@ -165,7 +209,7 @@ source("../01 Data/loadPackage.R", echo = TRUE)
 First, we displayed a few lines of the dataset stored in oracle database. The table includes Name(gene name), MINIMUM (gene start position), MAXIMUM(gene end position), LENGTH(gene length), DIRECTION(sense and anti-sense strand).
 
 
-**Table 1: Cyclotella**
+**Table: Plastid Genome Data**
 ```{r}
 source("../01 Data/Diatoms.R", echo = TRUE)
 ```
@@ -184,18 +228,37 @@ source("../02 Data Wrangling/Diatoms_geneFamily.R", echo = TRUE)
 source("../02 Data Wrangling/Ocean_gf_len.R", echo = TRUE)
 ```
 **********
+
 **Data Visualization**
  
-
-
 ```{r}
 source("../03 Visualizations/Ocean_gf_len.R", echo = TRUE)
 ```
+
+From this graph, we can see the average gene length in different gene families from the blue line. The shaded area indicates 95% confidence interval. 
+
+
+We can see rpl and rpo gene families have the largest average gene length, and the ycf gene family has the smallest average gene length. From this graph, we can see the average gene length in different gene families from the blue line. The shaded area indicates 95% confidence interval. 
 
 ```{r}
 source("../03 Visualizations/Ocean_gf_cnt.R", echo = TRUE)
 ```
 
+In this graph, the x axis represents different gene families, the y axis represents number of genes. From the legend, we can see the red color indicates genes in forward direction, and blue indicates genes in reverse direction.
+
+
+From this graph, we can see the trn gene family has the largest numbr of genes. And some gene family only have genes in one direction.
+
+
 ```{r}
 source("../03 Visualizations/FiveDiatoms.R", echo = TRUE)
 ```
+
+
+In this graph, we used the pushViewport to visualize gene number in different gene families for 4 diatom species. 
+
+
+From this graph, we can see that, the number of genes in different direction differ in different species. From the 1st average gene length figure, we can see that each gene family has different average gene length.
+
+The different number of genes, and different gene length, might be a cause contributing to different genome sizes. 
+
