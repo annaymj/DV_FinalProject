@@ -1,0 +1,1 @@
+ggplot(ocean_gf_len, aes(y=avg_gene_length, x=gene_family,group=1)) + stat_smooth(se = TRUE, size = 2,method = loess) +geom_point(size = 1)+labs(title = "T.Oceanica Average Gene Length of Different Gene Family", x= "Gene Family", y="Average Gene Length")
